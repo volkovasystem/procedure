@@ -1,2 +1,2 @@
-# proceed
+# procedure
 Option callback pattern protocol.
