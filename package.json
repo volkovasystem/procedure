@@ -1,0 +1,42 @@
+{
+	"name": "@volkovasystem/procedure",
+	"alias": "procedure",
+	"version": "0.0.0",
+	"description": "Option callback pattern protocol.",
+	"main": "procedure.js",
+	"scripts": {
+		"clean": "rm -rf ./node_modules || true && rm -fv ./package-lock.json || true && npm cache clean --force",
+		"reset": "npm run clean && rm -rfv ./procedure.js || true && rm -rfv ./.build || true && rm -rfv ./.test || true",
+		"bundle": "npx parcel build ./*.module.js --no-cache --no-source-maps --no-minify --out-dir ./.build --out-file ./procedure.bundle.js --global Procedure",
+		"compress": "npx terser ./.build/procedure.bundle.js --compress --keep-classnames --keep-fnames --output ./.build/procedure.js",
+		"resolve": "mv ./.build/procedure.js ./procedure.js && rm -rfv ./.build || true",
+		"build": "npm run bundle && npm run compress && npm run resolve",
+		"test": "node ./procedure.test.js",
+		"stage": "npm run reset && npm install && npm run build && npm test && npm run clean",
+		"prepublishOnly": "npm run stage"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/volkovasystem/procedure.git"
+	},
+	"keywords": [
+		"procedure",
+		"option",
+		"callback",
+		"pattern",
+		"protocol"
+	],
+	"author": "Richeve S. Bebedor <richeve.bebedor@gmail.com>",
+	"license": "MIT",
+	"bugs": {
+		"url": "https://github.com/volkovasystem/procedure/issues"
+	},
+	"homepage": "https://github.com/volkovasystem/procedure#readme",
+	"dependencies": {
+		"callback-once": "npm:@volkovasystem/callback-once@0.0.4",
+		"option": "npm:@volkovasystem/option@0.0.11",
+		"resolve-callback": "npm:@volkovasystem/resolve-callback@0.0.2",
+		"result": "npm:@volkovasystem/result@0.0.6",
+		"trigger": "npm:@volkovasystem/trigger@0.0.4"
+	}
+}
